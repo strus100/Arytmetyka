@@ -141,6 +141,9 @@ public class Wielomian {
                    }
                 }
             }
+            if(temp.size() == 0){
+                System.out.println("Brak pierwiastków");
+            }
             System.out.print("");
             Liczba powtorz = new Liczba(wyrazWolny.getLicznik(),aN.getLicznik());
 
