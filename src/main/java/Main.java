@@ -3,24 +3,19 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
 
-        Ulamki u = new Ulamki();
+        LinkedList<Liczba> wspolczynnikiW = new LinkedList<Liczba>();
 
-        LinkedList wspolczynnikiW = new LinkedList<String>();
-        wspolczynnikiW.add("-1/64");
-        wspolczynnikiW.add("7/32");
-        wspolczynnikiW.add("-7/8");
-        wspolczynnikiW.add("1/1");
+        wspolczynnikiW.add(new Liczba(-500L, 6561L));
+        wspolczynnikiW.add(new Liczba(1400L, 2187L));
+        wspolczynnikiW.add(new Liczba(-1565L, 729L));
+        wspolczynnikiW.add(new Liczba(97L, 27L));
+        wspolczynnikiW.add(new Liczba(-3L, 1L));
+        wspolczynnikiW.add(new Liczba(6561L, 1L));
 
         Wielomian w = new Wielomian(wspolczynnikiW);
 
-
-        for (int i = 0; i < w.mozliweWyniki().size(); i++) {
-            if(w.wartoscWielomianu(w.mozliweWyniki().get(i).toString()).equals("0/1")){
-                System.out.println(w.mozliweWyniki().get(i));
-            }
-        }
-
+        System.out.println(w.piszWielomian());
+        w.wynik(w.mozliweWyniki());
 
     }
-
 }

@@ -1,113 +1,65 @@
 
 public class Ulamki {
 
-    //TODO potęgowanie
-    public Long[] odczyt(String liczba){
-        String [] liczbyStr = liczba.split("/");
-        Long[] liczby = {0L,0L};
+    public Liczba mnoz(Liczba liczba0, Liczba liczba1){
+        Long licznik0 = liczba0.getLicznik();
+        Long mianownik0 = liczba0.getMianownik();
 
-        for (int i = 0; i < liczbyStr.length ; i++) {
-            liczby[i] = Long.parseLong(liczbyStr[i]);
-        }
-        return liczby;
+        Long licznik1 = liczba1.getLicznik();
+        Long mianownik1 = liczba1.getMianownik();
+
+        Liczba wynik = new Liczba();
+        wynik.setLicznik(licznik0 * licznik1);
+        wynik.setMianownik(mianownik0 * mianownik1);
+        wynik.skracanie();
+        return wynik;
     }
 
-    private Long NWD(Long a, Long b){
-    Long temp;
-        while(b != 0){
-        temp = b;
-        b = a % b;
-        a = temp;
-        }
-    return a;
-    }
-
-    public String skracanie(String liczba){
-        Long[]liczby = odczyt(liczba);
-        Long licznik = liczby[0];
-        Long mianownik = liczby[1];
-
-        Long dzielnik = NWD(licznik,mianownik);
-        ////////////////////////////////////////////
-
-        licznik = licznik / dzielnik;
-        mianownik = mianownik / dzielnik;
-
-        return licznik + "/" + mianownik;
-    }
-
-
-    public String mnoz(String liczba0, String liczba1){
-        liczba0 = skracanie(liczba0);
-        Long[]liczby = odczyt(liczba0);
-        Long licznik0 = liczby[0];
-        Long mianownik0 = liczby[1];
-
-        liczba1 = skracanie(liczba1);
-        liczby = odczyt(liczba1);
-        Long licznik1 = liczby[0];
-        Long mianownik1 = liczby[1];
-
-        return skracanie(licznik0 * licznik1 + "/" + mianownik0 * mianownik1);
-
-    }
-
-    public String potega(String liczba0, int stopien){
-        String temp = liczba0;
+    public Liczba potega(Liczba liczba0, int stopien){
+        Liczba temp = liczba0;
         for (int i = 1; i < stopien; i++) {
             temp = mnoz(temp,liczba0);
         }
         return temp;
 
     }
-    public String dziel(String liczba0, String liczba1){
-        skracanie(liczba0);
-        Long[]liczby = odczyt(liczba0);
-        Long licznik0 = liczby[0];
-        Long mianownik0 = liczby[1];
+    public Liczba dziel(Liczba liczba0, Liczba liczba1){
 
-        skracanie(liczba1);
-        liczby = odczyt(liczba1);
-        Long licznik1 = liczby[1];
-        Long mianownik1 = liczby[0];
-
-        return skracanie(licznik0 * licznik1 + "/" + mianownik0 * mianownik1);
-
+    return mnoz(liczba0,new Liczba(liczba1.getMianownik(),liczba1.getLicznik()));
     }
 
+    public Liczba dodaj(Liczba liczba0, Liczba liczba1){
+        Long licznik0 = liczba0.getLicznik();
+        Long mianownik0 = liczba0.getMianownik();
 
-    public String dodaj(String liczba0, String liczba1){
-        skracanie(liczba0);
-        Long[]liczby = odczyt(liczba0);
-        Long licznik0 = liczby[0];
-        Long mianownik0 = liczby[1];
+        Long licznik1 = liczba1.getLicznik();
+        Long mianownik1 = liczba1.getMianownik();
 
-        skracanie(liczba1);
-        liczby = odczyt(liczba1);
-        Long licznik1 = liczby[0];
-        Long mianownik1 = liczby[1];
-
-        return skracanie((licznik0 * mianownik1)  + (licznik1 * mianownik0) + "/" + mianownik0 * mianownik1);
-
+        Liczba wynik = new Liczba(licznik0,mianownik0);
+        wynik.setLicznik((licznik0 * mianownik1)  + (licznik1 * mianownik0));
+        wynik.setMianownik(mianownik0 * mianownik1);
+        wynik.skracanie();
+        return wynik;
     }
 
+    public Liczba odejmij(Liczba liczba0, Liczba liczba1){
+        Long licznik0 = liczba0.getLicznik();
+        Long mianownik0 = liczba0.getMianownik();
 
-    public String odejmij(String liczba0, String liczba1){
-        skracanie(liczba0);
-        Long[]liczby = odczyt(liczba0);
-        Long licznik0 = liczby[0];
-        Long mianownik0 = liczby[1];
+        Long licznik1 = liczba1.getLicznik();
+        Long mianownik1 = liczba1.getMianownik();
 
-        skracanie(liczba1);
-        liczby = odczyt(liczba1);
-        Long licznik1 = liczby[0];
-        Long mianownik1 = liczby[1];
-
-        return skracanie((licznik0 * mianownik1)  - (licznik1 * mianownik0) + "/" + mianownik0 * mianownik1);
-
+        Liczba wynik = new Liczba(licznik0,mianownik0);
+        wynik.setLicznik((licznik0 * mianownik1)  - (licznik1 * mianownik0));
+        wynik.setMianownik(mianownik0 * mianownik1);
+        wynik.skracanie();
+        return wynik;
     }
 
-    public String wartoscBezwzgledna(String liczba0){
-        return liczba0.replace("-","");
+    public Liczba wartoscBezwzgledna(Liczba liczba0){
+        if(liczba0.getLicznik()>=0)
+            return new Liczba(liczba0);
+        else
+            return new Liczba(liczba0.getLicznik()*(-1),liczba0.getMianownik());
     }
 }
