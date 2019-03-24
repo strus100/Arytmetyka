@@ -10,7 +10,7 @@ public class Main {
         wspolczynnikiW.add(new Liczba(-1565L, 729L));
         wspolczynnikiW.add(new Liczba(97L, 27L));
         wspolczynnikiW.add(new Liczba(-3L, 1L));
-        wspolczynnikiW.add(new Liczba(1L, 1L));
+        wspolczynnikiW.add(new Liczba(1111L, 1L));
 
         Wielomian w = new Wielomian(wspolczynnikiW);
 
